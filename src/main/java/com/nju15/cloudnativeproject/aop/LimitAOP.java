@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.RateLimiter;
 import com.nju15.cloudnativeproject.annotation.Limit;
 import com.nju15.cloudnativeproject.exception.LimitException;
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -18,7 +17,6 @@ import org.springframework.util.StringUtils;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Objects;
-@Slf4j
 @Aspect
 @Component
 public class LimitAOP{
@@ -40,14 +38,12 @@ public class LimitAOP{
                 // 还没有对应key的令牌桶
                 rateLimiter=RateLimiter.create(limit.permitsPerSecond());
                 limitMap.put(key,rateLimiter);
-                log.debug("新建了令牌桶={},容量={}",key,limit.permitsPerSecond());
             }
             rateLimiter=limitMap.get(key);
             // 尝试拿令牌
             boolean acquire=rateLimiter.tryAcquire(limit.timeout(),limit.timeunit());
             // 没有获取
             if(!acquire){
-                log.debug("令牌桶={}，获取令牌失败",key);
                 return new LimitException(limit.msg());
             }
         }
