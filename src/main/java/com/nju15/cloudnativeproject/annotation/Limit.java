@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 @Inherited
 public @interface Limit {
 
-
     /**
      * 实现不同的接口不同的流量控制
      * key是方法的名字
