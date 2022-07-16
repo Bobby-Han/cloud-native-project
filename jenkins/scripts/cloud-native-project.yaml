@@ -21,7 +21,7 @@ spec:
         app: cloud-native-project
     spec:
       containers:
-      - image: harbor.edu.cn/nju15/CloudNativeProject:{VERSION}
+      - image: harbor.edu.cn/nju15/cloud-native-project:{VERSION}
         name: cloud-native-project
       imagePullSecrets:
         - name: nju15

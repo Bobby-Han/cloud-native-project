@@ -36,8 +36,8 @@ pipeline {
             }
             steps {
                 echo "3. Image Build Stage"
-                sh 'docker build -f Dockerfile --build-arg jar_name=target/CloudNativeProject-0.0.1-SNAPSHOT.jar -t CloudNativeProject:${BUILD_ID} . '
-                sh 'docker tag CloudNativeProject:${BUILD_ID} harbor.edu.cn/nju15/CloudNativeProject:${BUILD_ID}'
+                sh 'docker build -f Dockerfile --build-arg jar_name=target/CloudNativeProject-0.0.1-SNAPSHOT.jar -t cloud-native-project:${BUILD_ID} . '
+                sh 'docker tag cloud-native-project:${BUILD_ID} harbor.edu.cn/nju15/cloud-native-project:${BUILD_ID}'
 
             }
 
@@ -50,7 +50,7 @@ pipeline {
             steps {
                 echo "4. Push Docker Image Stage"
                 sh "docker login --username=nju15 harbor.edu.cn -p nju152022"
-                sh "docker push harbor.edu.cn/nju15/CloudNativeProject:${BUILD_ID}"
+                sh "docker push harbor.edu.cn/nju15/cloud-native-project:${BUILD_ID}"
 
             }
 
